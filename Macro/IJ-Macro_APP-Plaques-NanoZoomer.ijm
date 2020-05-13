@@ -36,6 +36,7 @@ filterRois(names.length, minFeret, maxAR, minRound, minSolidity);
 
 //Edit Rois
 roiManager("Show All with labels");
+removeMultipleRois();
 waitForUser("You may now complement/correct Rois detection. \nEnd by pressing Ok");
 
 tagRois(names, colors);
@@ -113,6 +114,38 @@ function HSBSeg(thr, radOutliers, minSize, maxSize){
 	roiManager("Remove Frame Info");
 
 	roiManager("Show All without labels");
+}
+
+//---------------------------------------------------------------
+function removeMultipleRois(){
+	getOut=false;
+	while(!getOut){
+		setTool("rectangle");
+		waitForUser("Draw a rectangular Roi over the detections to delete, then press Ok\n-OR-\nDon't draw anything then press Ok to end");
+		if(selectionType!=-1){
+			roisRemover();
+		}else{
+			getOut=true;
+		}
+	}
+}
+
+//---------------------------------------------------------------
+function roisRemover(){
+	if(selectionType!=-1){
+		getBoundingRect(x, y, width, height);
+
+		for(i=names.length; i<roiManager("Count"); i++){
+			roiManager("Select", i);
+			getBoundingRect(xRoi, yRoi, wRoi, hRoi);
+			makeRectangle(x, y, width, height);
+			if(selectionContains(xRoi+wRoi/2, yRoi+hRoi/2)){
+				roiManager("Delete");
+				i--;
+			}
+		}
+		run("Select None");
+	}
 }
 
 //---------------------------------------------------------------
