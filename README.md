@@ -66,7 +66,7 @@ ___Additional required software___
 Install the following plugin
 NDPI Tools: [http://www.imnc.in2p3.fr/pagesperso/deroulers/software/ndpitools/](http://www.imnc.in2p3.fr/pagesperso/deroulers/software/ndpitools/). Precisely follow the step-by-step installation instructions given on the author's website.
 
-## How to install and use the macro?
+## How to install and use the macro ?
 1. Update ImageJ : Help/update puis Ok.
 2. Drag and drop the macro file onto ImageJ's toolbar.
 3. Under the macro window, select Run macro from the Run menu.
